@@ -18,12 +18,11 @@ fi
 os=$(./bin/os)
 distro=$(./bin/distro)
 if [ $os = windows ]; then
-	DOWNLOAD_URL=<url>
-elif [ $os = darwin ]; then
-	DOWNLOAD_URL=<url>
+	ext=.zip
 else
-	DOWNLOAD_URL=<url>
+	ext=.tar.gz
 fi
+DOWNLOAD_URL=https://github.com/shishidosoichiro/vendor/releases/download/$VERSION/vendor-$VERSION-$os-amd64$ext
 
 # Start
 echo "install: $VERSION"
@@ -32,7 +31,5 @@ rm -rf temp
 echo "download: $DOWNLOAD_URL"
 filename=$(./bin/download $DOWNLOAD_URL)
 echo "extract: $filename"
-./bin/extract "$filename" "versions/$VERSION"
-echo "build $VERSION"
-./bin/build $VERSION
+./bin/extract "$filename" "versions/$VERSION/bin"
 exit 0
